@@ -17,7 +17,7 @@ public class KomanduxApplication {
 	}
 
 	public Docket apis() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.komandux.swag")).build();
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.komandux.swag.Controller")).build();
 	}
 	
 }
