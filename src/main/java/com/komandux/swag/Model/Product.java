@@ -8,13 +8,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class Product {
 
-	@ApiModelProperty(dataType="int",notes="ProductId of the Product",name="productId",required=true,value="test 1")
+	@ApiModelProperty(dataType="int",value="ProductId of the Product",name="productId",required=true, example="1")
 	int productId;
-	@ApiModelProperty(name="barcode")
+	@ApiModelProperty(dataType="string", name="barcode", value="barcode of the Product")
 	String barcode;
-	@ApiModelProperty(name="name")
+	@ApiModelProperty(dataType="string", name="name", value="Name of the Product",required=true, example="Nike jogging shoes")
 	String name;
-	@ApiModelProperty(dataType="BigDecimal", name="price")
+	@ApiModelProperty(dataType="BigDecimal", value="Price of the Product",required=true, example="30.3")
 	BigDecimal price;
 	
 	public Product(int productId, String barcode, String name, BigDecimal price) {
