@@ -8,17 +8,17 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class Order {
 	
-	@ApiModelProperty(dataType="int",notes="OrderId of the Order",name="orderId",required=true,value="test 1")
+	@ApiModelProperty(dataType="int",value="Order id of the order",name="orderId",required=true, example="1")
 	int orderId;
-	@ApiModelProperty(dataType="DATE", name="purchaseDate")
+	@ApiModelProperty(dataType="Date",value="Order date",name="orderDate",required=true)
 	Date purchaseDate;
-	@ApiModelProperty(dataType="State", name="state")
+	@ApiModelProperty(dataType="State",value="Order state",name="orderState",required=true)
 	State state;
-	@ApiModelProperty(dataType="DeliveryMethod", name="deliveryMethod")
+	@ApiModelProperty(dataType="DeliveryMethod", value="Order delivery method",name="orderDeliveryMethod",required=true)
 	DeliveryMethod deliveryMethod;
-	@ApiModelProperty(dataType="Date", name="deliveryDate")
+	@ApiModelProperty(dataType="Date", value="Order delivery date",name="orderDeliveryDate",required=true)
 	Date deliveryDate;
-	@ApiModelProperty(dataType="PaymentMethod", name="paymentMethod")
+	@ApiModelProperty(dataType="PaymentMethod", value="Order payment method",name="orderPaymentMethod",required=true)
 	PaymentMethod paymentMethod;
 	@ApiModelProperty(dataType="String", name="transactionDetails")
 	String transactionDetails;

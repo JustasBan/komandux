@@ -29,8 +29,8 @@ public class ProductController {
 		products.add(new Product(3, "barcode", "product4", new BigDecimal("0.1")));
 	}
 	
-	@ApiOperation(value = "Create new product/service", tags="createProduct")
-	@RequestMapping(value = "/products", method = RequestMethod.POST)
+	@ApiOperation(value = "Create new product/service", tags="Product")
+	@RequestMapping(value = "/product", method = RequestMethod.POST)
 	public Product createProduct(@RequestBody Product product) {
 		
 		List<Integer> listIds = products.stream().map(u -> u.getProductId()).collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class ProductController {
 		return products.get(products.size()-1);
 	}
 	
-	@ApiOperation(value = "delete product/service by ID", tags="deleteProductById")
+	@ApiOperation(value = "delete product/service by ID", tags="Product")
 	@RequestMapping(value = "/productsDeleteById/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProductById(@PathVariable("id") int id) {
 		
@@ -48,7 +48,7 @@ public class ProductController {
 		
 		for(int i=0; i<products.size(); i++) {
 			if(products.get(i).getProductId()==id) {
-				index=products.get(i).getProductId();
+				index=i;
 			}
 		}
 		
@@ -61,8 +61,8 @@ public class ProductController {
 		}
 	}
 	
-	@ApiOperation(value = "delete product/service by name", tags="deleteProductByName")
-	@RequestMapping(value = "/productsDeleteById/{name}", method = RequestMethod.POST)
+	@ApiOperation(value = "delete product/service by name", tags="Product")
+	@RequestMapping(value = "/productsDeleteById/{name}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProductByName(@PathVariable("name") String name) {
 		
 		int deleteCount=0;
@@ -82,13 +82,13 @@ public class ProductController {
 		}
 	}
 	
-	@ApiOperation(value = "View all products/services", tags="viewProducts")
+	@ApiOperation(value = "View all products/services", tags="Product")
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public List<Product> viewProducts() {
 		return products;
 	}
 	
-	@ApiOperation(value = "View one product/service", tags="viewProduct")
+	@ApiOperation(value = "View one product/service", tags="Product")
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
 	public Product viewProduct(@PathVariable("id") int id) {
 		int index=-1;
@@ -100,6 +100,22 @@ public class ProductController {
 		}
 		
 		return products.get(index); 
+	}
+	
+	@ApiOperation(value = "update produt by ID", tags="Product")
+	@RequestMapping(value = "/ProductUpdateById/{id}", method = RequestMethod.PUT)
+	public Product updateProductById(@PathVariable("id") int id, @RequestBody Product product) {
+		
+		int index=0;
+		
+		for(int i=0; i<products.size(); i++) {
+			if(products.get(i).getProductId()==id) {
+				index=i;
+				products.set(i, new Product(id, product.getBarcode(), product.getName(), product.getPrice()));
+			}
+		}
+		
+		return products.get(index);
 	}
 
 }
