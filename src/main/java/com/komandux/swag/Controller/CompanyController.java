@@ -31,42 +31,42 @@ public class CompanyController {
 	}
 	
 	//gauti visas kompanijas
-	@ApiOperation(value = "Get list of Companies in the System ", response = Iterable.class, tags = "getCompanies")
+	@ApiOperation(value = "Get list of Companies in the System ", response = Iterable.class, tags = "Company")
 	@GetMapping(value = "/getCompanies")
 	public List<Company> getCompanies() {
 		return companies;
 	}
 	
 	//gauti kompanijas pagal supplierId
-	@ApiOperation(value = "Get Companies in the System ", response = Company.class, tags = "getCompaniesBySupplierId")
+	@ApiOperation(value = "Get Companies in the System ", response = Company.class, tags = "Company")
 	@GetMapping(value = "/getCompaniesBySupplierId/{supplierId}")
 	public List<Company> getCompaniesBySupplierId(@PathVariable(value = "supplierId") int supplierId) {
 		return companies.stream().filter(x -> x.getSupplierId() == (supplierId)).collect(Collectors.toList());
 	}
 	
 	//gauti kompanija pagal jos varda
-	@ApiOperation(value = "Get specific Company in the System ", response = Company.class, tags = "getCompanyByName")
+	@ApiOperation(value = "Get specific Company in the System ", response = Company.class, tags = "Company")
 	@GetMapping(value = "/getCompanyByName/{companyName}")
 	public Company getCompanyByName(@PathVariable(value = "companyName") String companyName) {
 		return companies.stream().filter(x -> x.getCompanyName().equalsIgnoreCase(companyName)).collect(Collectors.toList()).get(0);
 	}
 	
 	//gauti kompanijas pagal ServiceType
-	@ApiOperation(value = "Get list of Companies in the System ", response = Company.class, tags = "getCompaniesByServiceType")
+	@ApiOperation(value = "Get list of Companies in the System ", response = Company.class, tags = "Company")
 	@GetMapping(value = "/getCompaniesByServiceType/{serviceType}")
 	public List<Company> getCompaniesByServiceType(@PathVariable(value = "serviceType") ServiceType serviceType) {
 		return companies.stream().filter(x -> x.getServiceType() == (serviceType)).collect(Collectors.toList());
 	}
 	
 	//gauti kompanijas pagal RelationshipType
-	@ApiOperation(value = "Get list of Companies in the System ", response = Company.class, tags = "getCompaniesByRelationshipType")
+	@ApiOperation(value = "Get list of Companies in the System ", response = Company.class, tags = "Company")
 	@GetMapping(value = "/getCompaniesByRelationshipType/{relationshipType}")
 	public List<Company> getCompaniesByRelationshipType(@PathVariable(value = "relationshipType") RelationshipType relationshipType) {
 		return companies.stream().filter(x -> x.getRelationshipType() == (relationshipType)).collect(Collectors.toList());
 	}
 	
 	//ištrina company pagal name
-	@ApiOperation(value = "Delete The Customer in the System ", response = Customer.class, tags = "deleteACompanyByCompanyName")
+	@ApiOperation(value = "Delete The Customer in the System ", response = Customer.class, tags = "Company")
 	@DeleteMapping(value = "/deleteACompanyByCompanyName/{companyName}")
 	public ResponseEntity<?> deleteACompany(String companyName) {
 		for(int i=0; i<companies.size(); i++)
