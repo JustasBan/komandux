@@ -17,15 +17,23 @@ public class Reservation {
 	Date duration;
 	@ApiModelProperty(notes = "ReservationNotes of the Reservatioin",name="reservationNotes",required=true, value="test reservationNotes")
 	String reservationNotes;
+
+	@ApiModelProperty(dataType="PremiseType",notes="PremiseType of the Premise",name="premiseType",required=true,value="test premiseType")
+	PremiseType premiseType;
+
+	@ApiModelProperty(notes="Location of the Premise",name="location",required=true,value="test location")
+	String location;
 	
 	public Reservation(int reservationId, Date createdDate, Date reservationDate, Date duration,
-			String reservationNotes) {
+			String reservationNotes, PremiseType premiseType, String location) {
 		super();
 		this.reservationId = reservationId;
 		this.createdDate = createdDate;
 		this.reservationDate = reservationDate;
 		this.duration = duration;
 		this.reservationNotes = reservationNotes;
+		this.premiseType = premiseType;
+		this.location = location;
 	}
 
 	public int getReservationId() {
@@ -48,9 +56,17 @@ public class Reservation {
 		return reservationNotes;
 	}
 
+	public PremiseType getPremiseType() {
+		return premiseType;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation [reservationId=" + reservationId + ", createdDate=" + createdDate + ", reservationDate="
-				+ reservationDate + ", duration=" + duration + ", reservationNotes=" + reservationNotes + "]";
+				+ reservationDate + ", duration=" + duration + ", reservationNotes=" + reservationNotes + ", premiseType=" + premiseType + ", location=" + location + "]";
 	}
 }
