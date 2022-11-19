@@ -79,7 +79,7 @@ public class PositionController {
 
     @ApiOperation(value = "Delete Position by Id", response = Position.class, tags = "Position")
     @DeleteMapping(value = "/deletePositionById/{positionId}")
-    public ResponseEntity<?> deletePosition(int positionId) {
+    public ResponseEntity<?> deletePosition(@PathVariable(value = "positionId") int positionId) {
         for (int i = 0; i < positions.size(); i++) {
             if (positions.get(i).getPositionId() == (positionId)) {
                 positions.remove(i);

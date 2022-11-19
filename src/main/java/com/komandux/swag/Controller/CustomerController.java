@@ -70,7 +70,7 @@ public class CustomerController {
 	@ApiOperation(value = "Get specific Customer in the System ", response = Customer.class, tags = "Customer")
 	@GetMapping(value = "/getCustomerByUsernameAndPassword/{username, password}")
 	public Customer getCustomerByUsernameAndPassword(@PathVariable(value = "username") String username,
-			String password) {
+			@PathVariable(value = "password") String password) {
 		return customers.stream().filter(x -> x.getUsername().equals(username))
 				.filter(x -> x.getPassword().equals(password)).collect(Collectors.toList()).get(0);
 	}
@@ -118,7 +118,7 @@ public class CustomerController {
 	// ištrina customer pagal jo id
 	@ApiOperation(value = "Delete The Customer in the System ", response = Customer.class, tags = "Customer")
 	@DeleteMapping(value = "/deleteCustomerById/{customerId}")
-	public ResponseEntity<?> deleteACustomer(int customerId) {
+	public ResponseEntity<?> deleteACustomer(@PathVariable(value = "customerId") int customerId) {
 		for (int i = 0; i < customers.size(); i++) {
 			if (customers.get(i).getCustomerId() == (customerId)) {
 				customers.remove(i);
@@ -131,7 +131,8 @@ public class CustomerController {
 	// Darbuotojas gali pakeisti loyaltyType
 	@ApiOperation(value = "Change Customer LoyaltyType in the System ", response = Customer.class, tags = "Customer")
 	@PatchMapping(value = "/changeCustomerLoyaltyTypeByHisMembershipCard{membershipCard, loyaltyType}")
-	public ResponseEntity<?> changeCustomerLoyaltyType(String membershipCard, LoyaltyType loyaltyType) {
+	public ResponseEntity<?> changeCustomerLoyaltyType(@PathVariable(value = "membershipCard") String membershipCard, 
+			@PathVariable(value = "loyaltyType") LoyaltyType loyaltyType) {
 		for (int i = 0; i < customers.size(); i++) {
 			if (customers.get(i).getMembershipCard().equals(membershipCard)) {
 				Customer customer = customers.get(i);
