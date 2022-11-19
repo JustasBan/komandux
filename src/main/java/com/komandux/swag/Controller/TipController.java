@@ -54,7 +54,7 @@ public class TipController {
     }
 
     @ApiOperation(value = "Delete Tip by Id", response = Tip.class, tags = "Tip")
-    @DeleteMapping(value = "/deleteTipById/{employeeId}")
+    @DeleteMapping(value = "/deleteTipById/{tipId}")
     public ResponseEntity<?> deleteTip(int tipId) {
         for (int i = 0; i < tips.size(); i++) {
             if (tips.get(i).getTipId() == (tipId)) {
