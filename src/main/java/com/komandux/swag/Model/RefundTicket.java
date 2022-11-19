@@ -47,6 +47,10 @@ public class RefundTicket {
 	public boolean isGranted() {
 		return granted;
 	}
+	
+	public void setGranted() {
+		granted = true;
+	}
 
 	public String getReason() {
 		return reason;
@@ -54,6 +58,9 @@ public class RefundTicket {
 
 	public RefundType getRefundType() {
 		return refundType;
+	}
+	public void setRefundType(RefundType refundType) {
+		this.refundType = refundType; ;
 	}
 
 	@Override
