@@ -25,9 +25,9 @@ public class ReservationController {
     public List<Reservation> reservations = new ArrayList<>();
 
     {
-        reservations.add(new Reservation(0,new Date(),new Date(),new Date(),"notes", PremiseType.HotelRoom,"location"));
-        reservations.add(new Reservation(1,new Date(),new Date(),new Date(),"notes", PremiseType.RestaurantTable,"location"));
-        reservations.add(new Reservation(2,new Date(),new Date(),new Date(),"notes", PremiseType.Other,"location"));
+        reservations.add(new Reservation(0,1,1,new Date(),new Date(),new Date(),"notes", PremiseType.HotelRoom,"location"));
+        reservations.add(new Reservation(1,1,1,new Date(),new Date(),new Date(),"notes", PremiseType.RestaurantTable,"location"));
+        reservations.add(new Reservation(2,1,1,new Date(),new Date(),new Date(),"notes", PremiseType.Other,"location"));
     }
 
     @ApiOperation(value = "Create new reservation", tags="Reservation")
@@ -37,7 +37,7 @@ public class ReservationController {
         List<Integer> listIds = reservations.stream().map(Reservation::getReservationId).toList();
         int newId= listIds.stream().max(Integer::compareTo).get() + 1;
 
-        reservations.add(new Reservation(newId,new Date(),new Date(),new Date(),reservation.getReservationNotes(),reservation.getPremiseType(),reservation.getLocation()));
+        reservations.add(new Reservation(newId,reservation.getCustomerId(),reservation.getCompanyId(),new Date(),new Date(),new Date(),reservation.getReservationNotes(),reservation.getPremiseType(),reservation.getLocation()));
 
         return reservations.get(reservations.size()-1);
     }
@@ -72,7 +72,7 @@ public class ReservationController {
         for(int i=0; i<reservations.size(); i++) {
             if(reservations.get(i).getReservationId()==id) {
                 index=i;
-                reservations.set(i, new Reservation(id,reservation.getCreatedDate(),reservation.getReservationDate(),reservation.getDuration(),reservation.getReservationNotes(),reservation.getPremiseType(),reservation.getLocation()));
+                reservations.set(i, new Reservation(id,reservation.getCustomerId(),reservation.getCompanyId(),reservation.getCreatedDate(),reservation.getReservationDate(),reservation.getDuration(),reservation.getReservationNotes(),reservation.getPremiseType(),reservation.getLocation()));
             }
         }
 

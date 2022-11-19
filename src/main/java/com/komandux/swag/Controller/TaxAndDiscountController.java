@@ -26,8 +26,8 @@ public class TaxAndDiscountController {
     {
         discounts.add(new Discount(0, DiscountType.PercentageDiscount,new BigDecimal("0.1"),new Date(),new Date()));
         discounts.add(new Discount(1, DiscountType.PercentageDiscount,new BigDecimal("0.1"),new Date(),new Date()));
-        discounts.add(new Discount(0, DiscountType.FlatDiscount,new BigDecimal("0.1"),new Date(),new Date()));
-        discounts.add(new Discount(0, DiscountType.FlatDiscount,new BigDecimal("0.1"),new Date(),new Date()));
+        discounts.add(new Discount(2, DiscountType.FlatDiscount,new BigDecimal("0.1"),new Date(),new Date()));
+        discounts.add(new Discount(3, DiscountType.FlatDiscount,new BigDecimal("0.1"),new Date(),new Date()));
     }
 
     List<Tax> taxes = new ArrayList<>();
@@ -43,22 +43,22 @@ public class TaxAndDiscountController {
     @RequestMapping(value = "/discount", method = RequestMethod.POST)
     public Discount createDiscount(@RequestBody Discount discount) {
 
-        List<Integer> listGroups = discounts.stream().map(Discount::getGroup).toList();
-        int newGroup= listGroups.stream().max(Integer::compareTo).get() + 1;
+        List<Integer> listProducts = discounts.stream().map(Discount::getProduct).toList();
+        int newProduct= listProducts.stream().max(Integer::compareTo).get() + 1;
 
-        discounts.add(new Discount(newGroup,discount.getDiscountType(),discount.getAmmount(),new Date(),new Date()));
+        discounts.add(new Discount(newProduct,discount.getDiscountType(),discount.getAmmount(),new Date(),new Date()));
 
         return discounts.get(discounts.size()-1);
     }
 
-    @ApiOperation(value = "delete discount by GROUP", tags="Discount")
-    @RequestMapping(value = "/DiscountDeleteByGroup/{group}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteDiscountByGroup(@PathVariable("group") int group) {
+    @ApiOperation(value = "delete discount by PRODUCT", tags="Discount")
+    @RequestMapping(value = "/DiscountDeleteByProduct/{product}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteDiscountByProduct(@PathVariable("product") int product) {
 
         int index=-1;
 
         for(int i=0; i<discounts.size(); i++) {
-            if(discounts.get(i).getGroup()==group) {
+            if(discounts.get(i).getProduct()==product) {
                 index=i;
             }
         }
@@ -72,16 +72,16 @@ public class TaxAndDiscountController {
         }
     }
 
-    @ApiOperation(value = "update discount by GROUP", tags="Discount")
-    @RequestMapping(value = "/DiscountUpdateByGroup/{group}", method = RequestMethod.PUT)
-    public Discount updateDiscountByGroup(@PathVariable("group") int group, @RequestBody Discount discount) {
+    @ApiOperation(value = "update discount by PRODUCT", tags="Discount")
+    @RequestMapping(value = "/DiscountUpdateByProduct/{product}", method = RequestMethod.PUT)
+    public Discount updateDiscountByProduct(@PathVariable("product") int product, @RequestBody Discount discount) {
 
         int index=0;
 
         for(int i=0; i<discounts.size(); i++) {
-            if(discounts.get(i).getGroup()==group) {
+            if(discounts.get(i).getProduct()==product) {
                 index=i;
-                discounts.set(i, new Discount(group,discount.getDiscountType(),discount.getAmmount(),discount.getDiscountStart(),discount.getDiscountEnd()));
+                discounts.set(i, new Discount(product,discount.getDiscountType(),discount.getAmmount(),discount.getDiscountStart(),discount.getDiscountEnd()));
             }
         }
 
@@ -95,10 +95,10 @@ public class TaxAndDiscountController {
     }
 
     @ApiOperation(value = "View one discount", tags="Discount")
-    @RequestMapping(value = "/discount/{group}", method = RequestMethod.GET)
-    public ResponseEntity<?> viewDiscount(@PathVariable("group") int group) {
+    @RequestMapping(value = "/discount/{product}", method = RequestMethod.GET)
+    public ResponseEntity<?> viewDiscount(@PathVariable("product") int product) {
         for(int i=0; i<discounts.size(); i++) {
-            if(discounts.get(i).getGroup() == (group)) {
+            if(discounts.get(i).getProduct() == (product)) {
                 discounts.remove(i);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -110,22 +110,22 @@ public class TaxAndDiscountController {
     @RequestMapping(value = "/tax", method = RequestMethod.POST)
     public Tax createTax(@RequestBody Tax tax) {
 
-        List<Integer> listGroups = taxes.stream().map(Tax::getGroup).toList();
-        int newGroup= listGroups.stream().max(Integer::compareTo).get() + 1;
+        List<Integer> listOrders = taxes.stream().map(Tax::getOrder).toList();
+        int newOrder= listOrders.stream().max(Integer::compareTo).get() + 1;
 
-        taxes.add(new Tax(newGroup,tax.getTax(),tax.getTaxType(),tax.getTaxReason()));
+        taxes.add(new Tax(newOrder,tax.getTax(),tax.getTaxType(),tax.getTaxReason()));
 
         return taxes.get(taxes.size()-1);
     }
 
-    @ApiOperation(value = "delete tax by GROUP", tags="Tax")
-    @RequestMapping(value = "/TaxDeleteByGroup/{group}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteTaxByGroup(@PathVariable("group") int group) {
+    @ApiOperation(value = "delete tax by ORDER", tags="Tax")
+    @RequestMapping(value = "/TaxDeleteByOrder/{order}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteTaxByOrder(@PathVariable("order") int order) {
 
         int index=-1;
 
         for(int i=0; i<taxes.size(); i++) {
-            if(taxes.get(i).getGroup()==group) {
+            if(taxes.get(i).getOrder()==order) {
                 index=i;
             }
         }
@@ -139,16 +139,16 @@ public class TaxAndDiscountController {
         }
     }
 
-    @ApiOperation(value = "update tax by GROUP", tags="Tax")
-    @RequestMapping(value = "/TaxUpdateByGroup/{group}", method = RequestMethod.PUT)
-    public Tax updateTaxByGroup(@PathVariable("group") int group, @RequestBody Tax tax) {
+    @ApiOperation(value = "update tax by ORDER", tags="Tax")
+    @RequestMapping(value = "/TaxUpdateByOrder/{order}", method = RequestMethod.PUT)
+    public Tax updateTaxByOrder(@PathVariable("order") int order, @RequestBody Tax tax) {
 
         int index=0;
 
         for(int i=0; i<taxes.size(); i++) {
-            if(taxes.get(i).getGroup()==group) {
+            if(taxes.get(i).getOrder()==order) {
                 index=i;
-                taxes.set(i, new Tax(group,tax.getTax(),tax.getTaxType(),tax.getTaxReason()));
+                taxes.set(i, new Tax(order,tax.getTax(),tax.getTaxType(),tax.getTaxReason()));
             }
         }
 
@@ -162,10 +162,10 @@ public class TaxAndDiscountController {
     }
 
     @ApiOperation(value = "View one tax", tags="Tax")
-    @RequestMapping(value = "/tax/{group}", method = RequestMethod.GET)
-    public ResponseEntity<?> viewTax(@PathVariable("group") int group) {
+    @RequestMapping(value = "/tax/{order}", method = RequestMethod.GET)
+    public ResponseEntity<?> viewTax(@PathVariable("order") int order) {
         for(int i=0; i<taxes.size(); i++) {
-            if(taxes.get(i).getGroup() == (group)) {
+            if(taxes.get(i).getOrder() == (order)) {
                 taxes.remove(i);
                 return new ResponseEntity<>(HttpStatus.OK);
             }

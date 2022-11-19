@@ -9,6 +9,12 @@ import io.swagger.annotations.ApiModelProperty;
 public class Reservation {
 	@ApiModelProperty(dataType="int",notes="ReservationId of the Reservation",name="reservationId",required=true,value="test 1")
 	int reservationId;
+
+	@ApiModelProperty(dataType="int",notes="CustomerId of the Reservation",name="customerId",required=true,value="test 1")
+	int customerId;
+
+	@ApiModelProperty(dataType="int",notes="CompanyId of the Reservation",name="companyId",required=true,value="test 1")
+	int companyId;
 	@ApiModelProperty(dataType="Date",notes = "CreatedDate of the Reservatioin",name="createdDate",required=true, value="test createdDate")
 	Date createdDate;
 	@ApiModelProperty(dataType="Date",notes = "ReservationDate of the Reservatioin",name="reservationDate",required=true, value="test reservationDate")
@@ -24,10 +30,12 @@ public class Reservation {
 	@ApiModelProperty(notes="Location of the Premise",name="location",required=true,value="test location")
 	String location;
 	
-	public Reservation(int reservationId, Date createdDate, Date reservationDate, Date duration,
+	public Reservation(int reservationId, int customerId, int companyId, Date createdDate, Date reservationDate, Date duration,
 			String reservationNotes, PremiseType premiseType, String location) {
 		super();
 		this.reservationId = reservationId;
+		this.customerId = customerId;
+		this.companyId = companyId;
 		this.createdDate = createdDate;
 		this.reservationDate = reservationDate;
 		this.duration = duration;
@@ -38,6 +46,12 @@ public class Reservation {
 
 	public int getReservationId() {
 		return reservationId;
+	}
+
+	public int getCustomerId() { return customerId;}
+
+	public int getCompanyId() {
+		return companyId;
 	}
 
 	public Date getCreatedDate() {
@@ -66,7 +80,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [reservationId=" + reservationId + ", createdDate=" + createdDate + ", reservationDate="
+		return "Reservation [reservationId=" + reservationId + ", customerId=" + customerId + ", companyId=" + companyId + ",  createdDate=" + createdDate + ", reservationDate="
 				+ reservationDate + ", duration=" + duration + ", reservationNotes=" + reservationNotes + ", premiseType=" + premiseType + ", location=" + location + "]";
 	}
 }
