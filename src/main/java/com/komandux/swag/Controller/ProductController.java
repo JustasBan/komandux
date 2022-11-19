@@ -90,16 +90,14 @@ public class ProductController {
 	
 	@ApiOperation(value = "View one product/service", tags="Product")
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
-	public Product viewProduct(@PathVariable("id") int id) {
-		int index=-1;
-		
+	public ResponseEntity<?> viewProduct(@PathVariable("id") int id) {
 		for(int i=0; i<products.size(); i++) {
-			if(products.get(i).getProductId()==id) {
-				index=products.get(i).getProductId();
+			if(products.get(i).getProductId() == (id)) {
+				products.remove(i);
+				return new ResponseEntity<>(HttpStatus.OK);
 			}
 		}
-		
-		return products.get(index); 
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@ApiOperation(value = "update produt by ID", tags="Product")

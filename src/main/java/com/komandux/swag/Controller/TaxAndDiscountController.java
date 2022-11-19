@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(name="Discount ops")
+@RequestMapping(name="Discount")
 
 public class TaxAndDiscountController {
 
@@ -96,16 +96,14 @@ public class TaxAndDiscountController {
 
     @ApiOperation(value = "View one discount", tags="Discount")
     @RequestMapping(value = "/discount/{group}", method = RequestMethod.GET)
-    public Discount viewDiscount(@PathVariable("group") int group) {
-        int index=-1;
-
-        for (Discount discount : discounts) {
-            if (discount.getGroup() == group) {
-                index = discount.getGroup();
+    public ResponseEntity<?> viewDiscount(@PathVariable("group") int group) {
+        for(int i=0; i<discounts.size(); i++) {
+            if(discounts.get(i).getGroup() == (group)) {
+                discounts.remove(i);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-
-        return discounts.get(index);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @ApiOperation(value = "Create new tax", tags="Tax")
@@ -165,15 +163,13 @@ public class TaxAndDiscountController {
 
     @ApiOperation(value = "View one tax", tags="Tax")
     @RequestMapping(value = "/tax/{group}", method = RequestMethod.GET)
-    public Tax viewTax(@PathVariable("group") int group) {
-        int index=-1;
-
-        for (Tax tax : taxes) {
-            if (tax.getGroup() == group) {
-                index = tax.getGroup();
+    public ResponseEntity<?> viewTax(@PathVariable("group") int group) {
+        for(int i=0; i<taxes.size(); i++) {
+            if(taxes.get(i).getGroup() == (group)) {
+                taxes.remove(i);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-
-        return taxes.get(index);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

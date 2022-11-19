@@ -1,9 +1,10 @@
 package com.komandux.swag.Controller;
 
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 import com.komandux.swag.Model.*;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(name="Reservation ops")
+@RequestMapping(name="Reservation")
 
 public class ReservationController {
 
@@ -86,15 +87,13 @@ public class ReservationController {
 
     @ApiOperation(value = "View one reservation", tags="Reservation")
     @RequestMapping(value = "/reservation/{id}", method = RequestMethod.GET)
-    public Reservation viewReservation(@PathVariable("id") int id) {
-        int index=-1;
-
-        for (Reservation reservation : reservations) {
-            if (reservation.getReservationId() == id) {
-                index = reservation.getReservationId();
+    public ResponseEntity<?> viewReservation(@PathVariable("id") int id) {
+        for(int i=0; i<reservations.size(); i++) {
+            if(reservations.get(i).getReservationId() == (id)) {
+                reservations.remove(i);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
-
-        return reservations.get(index);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
