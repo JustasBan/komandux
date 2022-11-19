@@ -7,25 +7,32 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class Customer {
-	@ApiModelProperty(dataType="int",notes="Id of the Customer",name="customerId",required=true,value="test 1")
+	@ApiModelProperty(dataType="int", name="customerId")
 	int customerId;
-	@ApiModelProperty(notes = "Name of the Customer",name="name",required=true,value="test name")
+	@ApiModelProperty(dataType="String", name="name")
 	private String name;
-	@ApiModelProperty(notes = "Surname of the Customer",name="surname",required=true,value="test surname")
+	@ApiModelProperty(dataType="String", name="surname")
 	private String surname;
-	@ApiModelProperty(dataType="Date",notes = "DateOfBirth of the Customer",name="dataOfBirth",required=true, value="test 12/05/2015")
+	@ApiModelProperty(dataType="Date", name="dataOfBirth")
 	private Date dataOfBirth;
-	@ApiModelProperty(notes = "PhoneNumber of the Customer",name="phoneNumber",required=true,value="test phoneNumber")
+	@ApiModelProperty(dataType="String", name="phoneNumber")
 	private String phoneNumber;
-	@ApiModelProperty(notes = "EmailAddress of the Customer",name="emailAddress",required=true,value="test emailAddress")
+	@ApiModelProperty(dataType="String", name="emailAddress")
 	private String emailAddress;
-	@ApiModelProperty(dataType="Date",notes = "JoinDate of the Customer",name="joinDate",required=true, value="test 12/05/2015")
+	@ApiModelProperty(dataType="Date", name="joinDate")
 	private Date joinDate;
-	@ApiModelProperty(notes = "MembershipCard of the Customer",name="membershipCard",required=true,value="test membershipCard")
+	@ApiModelProperty(dataType="String", name="membershipCard")
 	private String membershipCard;
+	@ApiModelProperty(dataType="LoyaltyType",name="loyaltyType")
+	LoyaltyType loyaltyType;
+	@ApiModelProperty(dataType="String", name="username")
+	private String username;
+	@ApiModelProperty(dataType="String", name="password")
+	private String password;
+	
 	
 	public Customer(int customerId, String name, String surname, Date dataOfBirth, String phoneNumber, String emailAddress,
-			Date joinDate, String membershipCard) {
+			Date joinDate, String membershipCard, LoyaltyType loyaltyType) {
 		super();
 		this.customerId = customerId;
 		this.name = name;
@@ -35,7 +42,27 @@ public class Customer {
 		this.emailAddress = emailAddress;
 		this.joinDate = joinDate;
 		this.membershipCard = membershipCard;
+		this.loyaltyType = loyaltyType;
 	}
+	
+	public Customer(int customerId, String name, String surname, Date dataOfBirth, String phoneNumber, String emailAddress,
+			Date joinDate, String membershipCard, LoyaltyType loyaltyType, String username, String password)
+	{
+		super();
+		this.customerId = customerId;
+		this.name = name;
+		this.surname = surname;
+		this.dataOfBirth = dataOfBirth;
+		this.phoneNumber = phoneNumber;
+		this.emailAddress = emailAddress;
+		this.joinDate = joinDate;
+		this.membershipCard = membershipCard;
+		this.loyaltyType = loyaltyType;
+		this.username = username;
+		this.password = password;
+	}
+	
+	public Customer() {}
 	
 	public int getCustomerId() {
 		return customerId;
@@ -69,10 +96,47 @@ public class Customer {
 		return membershipCard;
 	}
 
+	public LoyaltyType getLoyaltyType() {
+		return loyaltyType;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setDataOfBirth(Date dataOfBirth) {
+		this.dataOfBirth = dataOfBirth;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public void setLoyaltyType(LoyaltyType loyaltyType) {
+		this.loyaltyType = loyaltyType;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", name=" + name + ", surname=" + surname + ", dataOfBirth="
 				+ dataOfBirth + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress + ", joinDate="
-				+ joinDate + ", membershipCard=" + membershipCard + "]";
+				+ joinDate + ", membershipCard=" + membershipCard
+				+ ", loyaltyType=" + loyaltyType + ", username=" + username + ", password=" + password + "]";
 	}
 }
