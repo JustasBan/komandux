@@ -76,6 +76,13 @@ public class CustomerController {
 		return customers.stream().filter(x -> x.getCustomerId() == (customerId)).collect(Collectors.toList()).get(0);
 	}
 	
+	//grazina vieninteli customer pagal jo membershipCard
+	@ApiOperation(value = "Get specific Customer in the System ", response = Customer.class, tags = "Customer")
+	@GetMapping(value = "/getCustomerById/{customerId}")
+	public Customer getCustomerByMembershipCard(@PathVariable(value = "membershipCard") String membershipCard) {
+		return customers.stream().filter(x -> x.getMembershipCard().equals(membershipCard)).collect(Collectors.toList()).get(0);
+	}
+	
 	//sukuriamas customer by Employee. Is story map, kad vietoje klientas uzpildo forma ir darbuotojas uzregistruoja sistemoje
 	@ApiOperation(value = "Create The Customer in the System by Employee", response = Customer.class, tags = "Customer")
 	@PostMapping(value = "/createACustomerByEmployee/{name, surname, dataOfBirth, phoneNumber, emailAddress, membershipCard}")

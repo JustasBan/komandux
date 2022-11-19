@@ -90,6 +90,7 @@ public class ProductController {
 	
 	@ApiOperation(value = "View one product/service", tags="Product")
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+
 	public ResponseEntity<?> viewProduct(@PathVariable("id") int id) {
 		for(int i=0; i<products.size(); i++) {
 			if(products.get(i).getProductId() == (id)) {
