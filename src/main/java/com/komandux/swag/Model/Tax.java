@@ -8,8 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class Tax {
 	
-	@ApiModelProperty(dataType="int",notes="Group of the Tax",name="group",required=true,value="test 1")
-	int group;
+	@ApiModelProperty(dataType="int",notes="Order of the Tax",name="order",required=true,value="test 1")
+	int order;
 	@ApiModelProperty(dataType="BigDecimal",notes="Tax of the Tax",name="tax",required=true,value="test 1.0")
 	BigDecimal tax;
 	@ApiModelProperty(dataType="TaxType",notes="TaxType of the Tax",name="taxType",required=true,value="test taxType")
@@ -17,16 +17,16 @@ public class Tax {
 	@ApiModelProperty(dataType="TaxReason",notes="TaxReason of the Tax",name="taxReason",required=true,value="test taxReason")
 	TaxReason taxReason;
 	
-	public Tax(int group, BigDecimal tax, TaxType taxType, TaxReason taxReason) {
+	public Tax(int order, BigDecimal tax, TaxType taxType, TaxReason taxReason) {
 		super();
-		this.group = group;
+		this.order = order;
 		this.tax = tax;
 		this.taxType = taxType;
 		this.taxReason = taxReason;
 	}
 	
-	public int getGroup() {
-		return group;
+	public int getOrder() {
+		return order;
 	}
 	public BigDecimal getTax() {
 		return tax;
@@ -40,6 +40,6 @@ public class Tax {
 
 	@Override
 	public String toString() {
-		return "Tax [group=" + group + ", tax=" + tax + ", taxType=" + taxType + ", taxReason=" + taxReason + "]";
+		return "Tax [order=" + order + ", tax=" + tax + ", taxType=" + taxType + ", taxReason=" + taxReason + "]";
 	}	
 }
